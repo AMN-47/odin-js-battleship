@@ -26,6 +26,7 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
+        type: 'javascript/auto',
         use: {
           loader: 'babel-loader',
         },
