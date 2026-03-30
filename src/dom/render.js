@@ -7,4 +7,7 @@ export function renderBoards(game) {
 
     const enemyBoard = document.createElement('div');
     enemyBoard.textContent = 'Enemy Board';
+
+    container.appendChild(playerBoard);
+    container.appendChild(enemyBoard);
 }
