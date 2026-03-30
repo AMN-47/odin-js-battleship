@@ -1,14 +1,14 @@
-import path from 'path';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-export default {
+module.exports = {
   mode: 'development',
 
   entry: './src/index.js',
 
   output: {
     filename: 'bundle.js',
-    path: path.resolve(process.cwd(), 'dist'),
+    path: path.resolve(__dirname, 'dist'),
     clean: true,
   },
 
@@ -22,6 +22,16 @@ export default {
 
   module: {
     rules: [
+      // ✅ ADD THIS BLOCK
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+        },
+      },
+
+      // existing CSS rule
       {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
