@@ -5,5 +5,6 @@ export function renderBoards(game) {
     const playerBoard = document.createElement('div');
     playerBoard.textContent = 'Player Board';
 
-    
+    const enemyBoard = document.createElement('div');
+    enemyBoard.textContent = 'Enemy Board';
 }
