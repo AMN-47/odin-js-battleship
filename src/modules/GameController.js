@@ -37,4 +37,10 @@ export default function GameController() {
     }
 
     setupGame();
+
+    return {
+        player,
+        computer,
+        playerAttack,
+    };
 }
