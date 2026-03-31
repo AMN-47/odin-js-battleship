@@ -22,11 +22,19 @@ export default function GameController() {
 
         if (computer.board.allShipsSunk()) {
             gameOver = true;
-            return {result, winnder: 'player'};
+            return {result, winner: 'player'};
         }
 
         //Computer Turn
         const {x: cx, y: cy} = computer.randomMove();
         computer.attack(player.board, cx, cy);
+
+        if (player.board.allShipsSunk()) {
+            gameOver = true;
+            return {result, winner: 'computer'};
+        }
+        return {result};
     }
+
+    setupGame();
 }
