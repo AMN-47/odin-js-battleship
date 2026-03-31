@@ -14,4 +14,15 @@ export default function GameController() {
         computer.board.placeShip(1, 1, 3);
         computer.board.placeShip(4, 4, 2);
     }
+
+    function playerAttack(x, y) {
+        if (gameOver) return;
+
+        const result = player.attack(computer.board, x, y);
+
+        if (computer.board.allShipsSunk()) {
+            gameOver = true;
+            return {result, winnder: 'player'};
+        }
+    }
 }
