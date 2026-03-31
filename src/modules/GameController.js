@@ -24,5 +24,9 @@ export default function GameController() {
             gameOver = true;
             return {result, winnder: 'player'};
         }
+
+        //Computer Turn
+        const {x: cx, y: cy} = computer.randomMove();
+        computer.attack(player.board, cx, cy);
     }
 }
