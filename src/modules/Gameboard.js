@@ -3,6 +3,11 @@ function createBoard(board, isEnemy = false, game = null) {
     boardEl.classList.add('board');
 
     for (let y =0; y < 10; y++) {
-        for (let x = 0; x < 10; x++) {}
+        for (let x = 0; x < 10; x++) {
+            const cell = document.createElement('div');
+            cell.classList.add('cell');
+
+            
+        }
     }
 }
