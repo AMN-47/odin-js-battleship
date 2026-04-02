@@ -1,41 +1,42 @@
-function createBoard(board, isEnemy = false, game = null) {
-    const boardEl = document.createElement('div');
-    boardEl.classList.add('board');
+import Ship from './Ship.js';
 
-    for (let y =0; y < 10; y++) {
-        for (let x = 0; x < 10; x++) {
-            const cell = document.createElement('div');
-            cell.classList.add('cell');
+export default class Gameboard {
+  constructor() {
+    this.board = {}; // "x,y" => ship
+    this.ships = [];
+    this.missedAttacks = [];
+  }
 
-            const key = `${x}, ${y}`;
-            const board = board.board[key];
+  placeShip(x, y, length, isHorizontal = true) {
+    const ship = new Ship(length);
 
-            //Shows ships only on player board
-            if (!isEnemy && ship) {
-                cell.classList.add('ship');
-            }
+    for (let i = 0; i < length; i++) {
+      const pos = isHorizontal
+        ? `${x + i},${y}`
+        : `${x},${y + i}`;
 
-            //Misses
-            if (board.missedAttacks.includes(key)) {
-                cell.classList.add('miss');
-            }
-
-            //If it hits
-            if (ship && ship.hits > 0) {
-                cell.classList.add('hit');
-            }
-
-            //click handler
-            if (isEnemy && game) {
-                cell.addEventListener('click' , ()=> {
-                    game.playerAttack(x, y);
-                    renderBoards(game);
-                });
-            }
-
-            boardEl.appendChild(cell);
-        }
+      this.board[pos] = ship;
     }
 
-    return boardEl;
+    this.ships.push(ship);
+  }
+
+  receiveAttack(x, y) {
+    const key = `${x},${y}`;
+
+    if (this.board[key]) {
+      const ship = this.board[key];
+      ship.hit(key);
+      return 'hit';
+    } else {
+      if (!this.missedAttacks.includes(key)) {
+        this.missedAttacks.push(key);
+      }
+      return 'miss';
+    }
+  }
+
+  allShipsSunk() {
+    return this.ships.every(ship => ship.isSunk());
+  }
 }
