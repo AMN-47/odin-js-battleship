@@ -6,7 +6,12 @@ export default class Ship {
     }
     hit(position) {
         if (!this.hitPositions.has(position)) {
-            
+            this.hits++;
+            this.hitPositions.add(position);
         }
+    }
+
+    isSunk(){
+        return this.hits >= this.length;
     }
 }
