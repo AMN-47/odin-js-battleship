@@ -7,7 +7,8 @@ function createBoard(board, isEnemy = false, game = null) {
             const cell = document.createElement('div');
             cell.classList.add('cell');
 
-            
+            const key = `${x}, ${y}`;
+            const board = board.board[key];
         }
     }
 }
