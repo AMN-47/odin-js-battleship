@@ -9,6 +9,12 @@ function createBoard(board, isEnemy = false, game = null) {
 
             const key = `${x}, ${y}`;
             const board = board.board[key];
+
+            //Shows ships only on player board
+            if (!isEnemy && ship) {
+                cell.classList.add('ship');
+            }
+            
         }
     }
 }
