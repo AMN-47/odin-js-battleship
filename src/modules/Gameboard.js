@@ -14,7 +14,11 @@ function createBoard(board, isEnemy = false, game = null) {
             if (!isEnemy && ship) {
                 cell.classList.add('ship');
             }
-            
+
+            //Misses
+            if (board.missedAttacks.includes(key)) {
+                cell.classList.add('miss');
+            }
         }
     }
 }
