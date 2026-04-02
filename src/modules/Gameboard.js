@@ -19,6 +19,23 @@ function createBoard(board, isEnemy = false, game = null) {
             if (board.missedAttacks.includes(key)) {
                 cell.classList.add('miss');
             }
+
+            //If it hits
+            if (ship && ship.hits > 0) {
+                cell.classList.add('hit');
+            }
+
+            //click handler
+            if (isEnemy && game) {
+                cell.addEventListener('click' , ()=> {
+                    game.playerAttack(x, y);
+                    renderBoards(game);
+                });
+            }
+
+            boardEl.appendChild(cell);
         }
     }
+
+    return boardEl;
 }
